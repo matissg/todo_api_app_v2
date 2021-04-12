@@ -1,6 +1,5 @@
 class Task < ApplicationRecord
-  has_many :taggings, as: :taggable, dependent: :destroy
-  has_many :tags, through: :taggings
+  include WithTaggable
 
-  validates :title, length: { in: 3..500, message: '3 to 500 characters allowed' }, presence: true
+  validates :title, length: { in: 3..500, message: I18n.t(:characters_allowed, min: 3, max: 500) }, presence: true
 end

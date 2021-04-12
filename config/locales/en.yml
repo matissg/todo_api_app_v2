@@ -1,2 +1,3 @@
 en:
   not_found: Record was not found
+  characters_allowed: '%{min} to %{max} characters allowed'
