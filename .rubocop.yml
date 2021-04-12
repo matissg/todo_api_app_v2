@@ -1,0 +1,75 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+    - bin/*
+  SuggestExtensions: false
+
+Lint/MissingSuper:
+  Exclude:
+    - app/components/**/*
+
+Lint/EmptyFile:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
+  Exclude:
+    - db/migrate/*
+    - app/seeds/*
+    - app/datatables/**/*.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+    - db/migrate/*
+    - config/routes.rb
+    - config/environments/*.rb
+    - config/initializers/*.rb
+    - lib/tasks/*.rake
+
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - db/migrate/*
+    - app/datatables/**/*.rb
+
+Metrics/ClassLength:
+  Max: 200
+  Exclude:
+    - app/seeds/*
+
+Style/NumericLiterals:
+  Exclude:
+    - db/data_schema.rb
+
+Style/Encoding:
+  Exclude:
+    - db/data_schema.rb
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Layout/EmptyLineAfterMagicComment:
+  Exclude:
+    - db/data_schema.rb
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+
+Style/MethodCallWithoutArgsParentheses:
+  Exclude:
+    - db/data_schema.rb

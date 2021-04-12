@@ -1,0 +1,10 @@
+en:
+  activemodel:
+    errors:
+      models:
+        resource_with_tag:
+          attributes:
+            base:
+              not_found: Resource was not found
+              too_many_tags: Up to 30 tags allowed
+              wrong_tags: Tags in array allowed

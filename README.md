@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This demo Rails 6.0 API app is prepared by Matiss Gaigals.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+A simple TODO application that allows to:
+* Add new task (at least 3 characters for task title)
+* Edit existing task
+* List all tasks
+* Tag a task (at least 3 letters for tag and up to 30 tags allowed)
+* Delete existing task
