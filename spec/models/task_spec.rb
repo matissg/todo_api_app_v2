@@ -9,3 +9,13 @@ RSpec.describe Task, type: :model do
 
   include_examples 'a title validation', 501
 end
+
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id         :integer          not null, primary key
+#  title      :string(500)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

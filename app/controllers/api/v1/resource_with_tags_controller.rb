@@ -16,8 +16,8 @@ class Api::V1::ResourceWithTagsController < ApplicationController
   def create
     resource_params
 
-    if resource.save
-      render jsonapi: resource.record, include: :tags, status: :created
+    if resource_with_tag.save
+      render jsonapi: resource_with_tag.record, include: :tags, status: :created
     else
       render_errors
     end
@@ -28,8 +28,8 @@ class Api::V1::ResourceWithTagsController < ApplicationController
   def update
     resource_params
 
-    if resource.save
-      render jsonapi: resource.record, include: :tags
+    if resource_with_tag.save
+      render jsonapi: resource_with_tag.record, include: :tags
     else
       render_errors
     end
@@ -43,12 +43,19 @@ class Api::V1::ResourceWithTagsController < ApplicationController
 
   private
 
-  def resource
-    @resource ||= ResourceWithTag.new(resource_klass)
+  def resource_with_tag
+    @resource_with_tag ||= "#{resource_class}WithTag".constantize.new(resource_class)
   end
 
   def resource_params
-    resource.params = params.require(:data).require(:attributes).permit(allowed_params_base).merge(id: params[:id])
+    resource_with_tag.params = params.require(:data)
+                                     .require(:attributes)
+                                     .permit(allowed_params)
+                                     .merge(id: params[:id])
+  end
+
+  def allowed_params
+    allowed_params_base
   end
 
   def allowed_params_base
@@ -56,7 +63,7 @@ class Api::V1::ResourceWithTagsController < ApplicationController
   end
 
   def render_all_records
-    render jsonapi: resource_klass.all.includes(taggings: :tag), include: :tags
+    render jsonapi: resource_class.all.includes(:tags), include: :tags
   end
 
   def render_record
@@ -64,10 +71,10 @@ class Api::V1::ResourceWithTagsController < ApplicationController
   end
 
   def record
-    @record ||= resource_klass.find(params[:id])
+    @record ||= resource_class.find(params[:id])
   end
 
   def render_errors
-    render jsonapi_errors: resource.errors, status: :unprocessable_entity
+    render jsonapi_errors: resource_with_tag.errors, status: :unprocessable_entity
   end
 end

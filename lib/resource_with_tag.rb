@@ -16,7 +16,6 @@ class ResourceWithTag
 
     ActiveRecord::Base.transaction do
       @record = prepare_resource
-      tags.blank? ? remove_tags : add_tags
 
       true
     end
@@ -27,10 +26,6 @@ class ResourceWithTag
 
   private
 
-  def title
-    @title ||= params[:title]
-  end
-
   def tags
     @tags ||= params[:tags]
   end
@@ -40,21 +35,21 @@ class ResourceWithTag
     item = id.nil? ? resource.new : resource.find_by(id: id)
     return add_error(:not_found) unless item
 
-    item.title = title
+    item.assign_attributes(resource_attributes.merge(tags: add_tags))
     item.save!
     item
   end
 
   def add_tags
-    record.tags = sanitized_unique_tags.map { |tag_title| Tag.where(title: tag_title).first_or_create! }.compact
-  end
+    existing_tags = Tag.where(title: sanitized_unique_tags)
+    creatable_tags = sanitized_unique_tags - existing_tags.map(&:title)
+    new_tags = creatable_tags.map { |tag_title| Tag.create!(title: tag_title) }
 
-  def remove_tags
-    record.taggings&.destroy_all
+    existing_tags + new_tags
   end
 
   def sanitized_unique_tags
-    @sanitized_unique_tags ||= tags.map { |tag| tag.tr('#', '').tr('@', '') }.uniq.reject(&:empty?)
+    @sanitized_unique_tags ||= tags.map { |tag| tag.tr('#@', '') }.uniq.reject(&:empty?)
   end
 
   def tags_titles_validation

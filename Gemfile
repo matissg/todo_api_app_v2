@@ -18,18 +18,18 @@ gem 'i18n'
 gem 'rails-i18n'
 
 group :development, :test do
+  # Annotates Rails/ActiveRecord Models, routes, fixtures, and others based on the database schema
+  gem 'annotate', '~> 3.1', '>= 3.1.1'
+  # Helps to kill N+1 queries and unused eager loading
+  gem 'bullet', '~> 6.1', '>= 6.1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'pry', '~> 0.14.0'
   gem 'rspec_junit_formatter'
   gem 'rspec-rails', '~> 5.0'
-  gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
   gem 'rubocop', '~> 1.12', '>= 1.12.1'
-end
-
-group :test do
-  gem 'ast', '~> 2.4', '>= 2.4.2'
+  gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
 end
 
 group :development do

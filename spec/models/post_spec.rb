@@ -9,3 +9,14 @@ RSpec.describe Post, type: :model do
 
   include_examples 'a title validation', 501
 end
+
+# == Schema Information
+#
+# Table name: posts
+#
+#  id         :integer          not null, primary key
+#  content    :text(5000)
+#  title      :string(500)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

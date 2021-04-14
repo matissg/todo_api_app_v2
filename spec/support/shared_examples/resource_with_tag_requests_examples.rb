@@ -1,4 +1,6 @@
 RSpec.shared_examples_for 'a resource with tags requests' do |resources|
+  let(:attributes) { { data: { id: nil, attributes: { title: title }, tags: ['Today'] } } }
+
   describe "GET /api/v1/#{resources}" do
     before { get public_send("api_v1_#{resources}_path") }
 
